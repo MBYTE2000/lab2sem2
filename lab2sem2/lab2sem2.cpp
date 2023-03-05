@@ -123,28 +123,19 @@ void Sort_p(Stack** p) {
 
     }
 
-void Individual(Stack *p)
+void Individual(Stack *begin)
 {
-    Stack* t = p;
-    int max = 0;
-    for(int i = 0;t->next != NULL;i++)
-    {
-        if (t->info > max) max = t->info;
-        t = t->next;
+    Stack* t = begin, * p = begin->next;
+    for (; p; p = p->next)
+        if (p->info > t->info)  t = p;
+    p = begin;
+    if (p != t) {
+        while (p->next != t)   p = p->next;
+        p->next = t->next;
     }
-
-    while (t != NULL) {
-        if (t->info == max) {
-            p->next = t->next;
-            delete t;
-            t = p->next;
-        }
-        else {
-            p = t;
-            t = t->next;
-        }
-    }
-
+    else
+        begin = t->next;
+    delete t;
 }
 
 
@@ -221,7 +212,8 @@ int main()
             View(Begin);
             break;
         case 7:
-
+            Individual(Begin);
+            View(Begin);
             break;
 
         case 0:
