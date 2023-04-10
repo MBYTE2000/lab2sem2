@@ -145,7 +145,7 @@ int main()
 
     while (true) {
 
-        cout << "\n\tCreat - 1.\n\tAdd - 2.\n\tView - 3.\n\tDel - 4.\n\tSort1 - 5\n\tSort2 - 6\n\tIndividual - 7\n\tEXIT - 0. : ";
+        cout << "\n\tCreate - 1.\n\tAdd - 2.\n\tView - 3.\n\tDel - 4.\n\tSort1 - 5\n\tSort2 - 6\n\tIndividual - 7\n\tSave - 8\n\tEXIT - 0. : ";
 
         cin >> kod;
 
@@ -216,8 +216,19 @@ int main()
             View(Begin);
             break;
 
-        case 0:
+        case 8:
+            /*ofstream out("text.txt");
+            if (!out.is_open()) return;
+            Stack *b = Begin;
+            while (b != NULL)
+            {
+                out << b->info << endl;
+                b = b->next;
+            }
+            out.close();*/
+            break;
 
+        case 0:
             if (Begin != NULL)
 
                 Del_All(&Begin);
