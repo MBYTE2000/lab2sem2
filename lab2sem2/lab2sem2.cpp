@@ -1,5 +1,6 @@
 ﻿#include <iostream>
 #include <random>
+#include <fstream>
 using namespace std;
 
 struct Stack {
@@ -138,24 +139,44 @@ void Individual(Stack *begin)
     delete t;
 }
 
+void saveStackToFile(Stack* top, const std::string& filename) {
+    ofstream file;
+    file.open(filename);
+
+    if (file.is_open()) {
+        Stack* current = top;
+
+        while (current != nullptr) {
+            file << current->info << std::endl;
+            current = current->next;
+        }
+
+        file.close();
+        std::cout << "Стек успешно сохранен в файл: " << filename << std::endl;
+    }
+    else {
+        std::cerr << "Не удалось открыть файл: " << filename << std::endl;
+    }
+}
+
 
 int main()
 {
-    int i, in, n, kod;
+    int i, in, n, input;
 
     while (true) {
 
         cout << "\n\tCreate - 1.\n\tAdd - 2.\n\tView - 3.\n\tDel - 4.\n\tSort1 - 5\n\tSort2 - 6\n\tIndividual - 7\n\tSave - 8\n\tEXIT - 0. : ";
 
-        cin >> kod;
+        cin >> input;
 
-        switch (kod) {
+        switch (input) {
 
-        case 1:
+        case 1: 
 
         case 2:
 
-            if (kod == 1 && Begin != NULL) {
+            if (input == 1 && Begin != NULL) {
 
                 // Если создаем новый стек, должны освободить память, занятую предыдущим
 
@@ -175,7 +196,7 @@ int main()
 
             }
 
-            if (kod == 1) cout << "Create " << n << endl;
+            if (input == 1) cout << "Create " << n << endl;
 
             else cout << "Add " << n << endl;
 
@@ -217,15 +238,7 @@ int main()
             break;
 
         case 8:
-            /*ofstream out("text.txt");
-            if (!out.is_open()) return;
-            Stack *b = Begin;
-            while (b != NULL)
-            {
-                out << b->info << endl;
-                b = b->next;
-            }
-            out.close();*/
+            saveStackToFile(Begin, "example");
             break;
 
         case 0:
